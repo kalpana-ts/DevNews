@@ -1,0 +1,14 @@
+version: "3"
+services:
+  database:
+    image: postgres:11-alpine
+    environment:
+      - POSTGRES_DB=newsfeed
+      - POSTGRES_USER=newsfeed_user
+      - POSTGRES_PASSWORD=newsfeed_pass
+    ports:
+      - "5433:5432"
+    volumes:
+      - db-data:/var/lib/posgresql/data
+volumes:
+  db-data:
