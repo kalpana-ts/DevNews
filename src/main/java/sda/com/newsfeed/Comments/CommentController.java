@@ -19,8 +19,11 @@ public class CommentController {
 
     //List of all comments
     @GetMapping("")
-    public List<Comment> getAll() {
-        return commentservice.getAll();
+    public List<Comment> getAll(@RequestParam(required = false) Long articleId) {
+        if(articleId==null)
+            return commentservice.getAll();
+        else
+            return commentservice.getAllByArticleId(articleId);
     }
 
     //get an comment by its id
