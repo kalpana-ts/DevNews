@@ -1,31 +1,25 @@
-package sda.com.newsfeed.articles;
+package sda.com.newsfeed.Comments;
 
-import sda.com.newsfeed.Comments.Comment;
+import sda.com.newsfeed.articles.Article;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-
-public class Article {
-
+public class Comment {
     @Id
-    //This id will be auto created by db as an identity
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    @Column(columnDefinition = "TEXT")
     private String body;
     private String authorName;
-    @OneToMany
-    private List<Comment> comments;
 
-    public Article() {
+    @ManyToOne
+    private Article article;
+
+    public Comment() {
     }
 
-    public Article(Long id, String title, String body, String authorName) {
+    public Comment(Long id, String body, String authorName) {
         this.id = id;
-        this.title = title;
         this.body = body;
         this.authorName = authorName;
     }
@@ -36,14 +30,6 @@ public class Article {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getBody() {
@@ -62,4 +48,11 @@ public class Article {
         this.authorName = authorName;
     }
 
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
+    }
 }

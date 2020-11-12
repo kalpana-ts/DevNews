@@ -12,12 +12,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/articles")
 public class ArticleController {
-    @Autowired
+
     private ArticleService articleservice;
 
-    /*public ArticleController() {
-        this.articleservice = new ArticleService( );
-    }*/
+    public ArticleController( @Autowired ArticleService articleService) {
+        this.articleservice = articleService;
+    }
 
     //List of all articles
     @GetMapping("")
@@ -36,6 +36,11 @@ public class ArticleController {
     @PostMapping("")
     public Article create(@RequestBody Article article) {
         return articleservice.create(article);
+    }
+
+    @PutMapping("")
+    public Article update(@RequestBody Article article) {
+        return articleservice.update(article);
     }
 
     @DeleteMapping("/{id}")
