@@ -1,6 +1,7 @@
 package sda.com.newsfeed.articles;
 
 import sda.com.newsfeed.Comments.Comment;
+import sda.com.newsfeed.topics.Topic;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,6 +20,8 @@ public class Article {
     private String authorName;
     @OneToMany
     private List<Comment> comments;
+    @ManyToMany
+    private List<Topic> topics;
 
     public Article() {
     }
@@ -62,4 +65,11 @@ public class Article {
         this.authorName = authorName;
     }
 
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
+    }
 }
