@@ -35,4 +35,8 @@ public class CommentService {
     public void delete(Long id) {
         repo.deleteById(id);
     }
+
+    public List<Comment> getAllByArticleId(Long articleId) {
+        return repo.findAllByArticleId(articleId);
+    }
 }
