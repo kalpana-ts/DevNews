@@ -11,41 +11,41 @@ import java.util.List;
 @RestController
 @RequestMapping("/comments")
 public class CommentController {
-    private CommentService commentservice;
+    private CommentService commentService;
 
     public CommentController( @Autowired CommentService commentService) {
-        this.commentservice = commentService;
+        this.commentService = commentService;
     }
 
     //List of all comments
     @GetMapping("")
     public List<Comment> getAll(@RequestParam(required = false) Long articleId) {
         if(articleId==null)
-            return commentservice.getAll();
+            return commentService.getAll();
         else
-            return commentservice.getAllByArticleId(articleId);
+            return commentService.getAllByArticleId(articleId);
     }
 
     //get an comment by its id
     @GetMapping("/{id}")
     public Comment getById(@PathVariable Long id) {
-        return commentservice.getById(id)
+        return commentService.getById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     //post a new comment
     @PostMapping("")
     public Comment create(@RequestBody Comment comment) {
-        return commentservice.create(comment);
+        return commentService.create(comment);
     }
 
     @PutMapping("")
     public Comment update(@RequestBody Comment comment) {
-        return commentservice.update(comment);
+        return commentService.update(comment);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
-        commentservice.delete(id);
+        commentService.delete(id);
     }
 }

@@ -9,7 +9,7 @@ import java.util.Optional;
 @Service
 public class TopicService {
     @Autowired
-    TopicRepo repo;
+    private TopicRepo repo;
 
     public List<Topic> getAll() {
         return repo.findAll();

@@ -13,38 +13,43 @@ import java.util.Optional;
 @RequestMapping("/articles")
 public class ArticleController {
 
-    private ArticleService articleservice;
+    private ArticleService articleService;
 
     public ArticleController( @Autowired ArticleService articleService) {
-        this.articleservice = articleService;
+
+        this.articleService = articleService;
     }
 
     //List of all articles
     @GetMapping("")
-    public List<Article> getAll() {
-        return articleservice.getAll();
+    public List<Article> getAll(@RequestParam(required = false) Long topicId) {
+        if (topicId == null) {
+            return articleService.getAll();
+        } else {
+            return articleService.getAllByTopicId(topicId);
+        }
     }
 
     //get an article by its id
     @GetMapping("/{id}")
     public Article getById(@PathVariable Long id) {
-        return articleservice.getById(id)
+        return articleService.getById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     //post a new article
     @PostMapping("")
     public Article create(@RequestBody Article article) {
-        return articleservice.create(article);
+        return articleService.create(article);
     }
 
     @PutMapping("")
     public Article update(@RequestBody Article article) {
-        return articleservice.update(article);
+        return articleService.update(article);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
-        articleservice.delete(id);
+        articleService.delete(id);
     }
 }
