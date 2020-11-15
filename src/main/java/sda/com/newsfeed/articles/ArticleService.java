@@ -19,6 +19,10 @@ public class ArticleService {
        return repo.findAll();
     }
 
+    public List<Article> getAllByTopicId(Long topicId) {
+        return repo.findAllByTopicsId(topicId);
+    }
+
     public Optional<Article> getById(Long id) {
         return repo.findById(id);
 

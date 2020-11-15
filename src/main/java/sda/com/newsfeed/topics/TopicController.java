@@ -12,7 +12,7 @@ import java.util.Optional;
 @RequestMapping("/topics")
 public class TopicController {
     @Autowired
-    TopicService topicService;
+    private TopicService topicService;
 
     @GetMapping("")
     public List<Topic> getAll(@RequestParam(required = false) Long articleId) {
